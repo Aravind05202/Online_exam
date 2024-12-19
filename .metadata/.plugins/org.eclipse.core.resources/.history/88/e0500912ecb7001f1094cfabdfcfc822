@@ -1,0 +1,30 @@
+package com.example.onlineclass.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.onlineclass.model.ClassInfo;
+import com.example.onlineclass.service.ClassInfoService;
+
+import java.util.List;
+
+@Controller
+public class ClassController {
+
+    @Autowired
+    private ClassInfoService classInfoService;
+
+    /**
+     * Displays the form for modifying questions, including all available classes.
+     */
+    @GetMapping("/modify_question")
+    public String showModifyQuestionsForm(Model model) {
+        // Fetch all classes
+        List<ClassInfo> classInfoList = classInfoService.getAllClasses();
+
+        model.addAttribute("classInfoList", classInfoList);
+        return "modify_question";
+    }
+}
